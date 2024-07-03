@@ -16,7 +16,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // const clientId=process.env.REACT_APP_AUTH_CLIENT;
 
 
-
 root.render(
 
   <AuthProvider>

@@ -90,6 +90,8 @@ const Cart = () => {
               </p>
             </div>
           </div>
+
+        
         </div>
       </div>
     </Wrapper>
@@ -156,6 +158,10 @@ const Wrapper = styled.section`
   }
   .cart-user--name {
     text-transform: capitalize;
+  }
+
+  .my-style{
+    margin-top: 12px;
   }
   .cart-image--name {
     /* background-color: red; */
@@ -252,6 +258,8 @@ const Wrapper = styled.section`
       font-weight: bold;
       color: ${({ theme }) => theme.colors.heading};
     }
+
+
   }
 
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
