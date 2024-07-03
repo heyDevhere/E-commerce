@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Button } from "../styles/Button";
 
 const HeroSection = ({ myData }) => {
-  const { name,src} = myData;
+  const { name, src } = myData;
 
   return (
     <Wrapper>
@@ -13,10 +13,12 @@ const HeroSection = ({ myData }) => {
             <p className="intro-data">Welcome to </p>
             <h1> {name} </h1>
             <p>
-            Welcome to our ecommerce electronic store, where innovation meets convenience. Explore our range of cutting-edge electronics for all your tech needs.
+              Welcome to our ecommerce electronic store, where innovation meets convenience. Explore our range of cutting-edge electronics for all your tech needs.
             </p>
-            <NavLink>
-              <Button>show now</Button>
+            <NavLink to="/products">
+              <Button onClick={() => {
+                window.scrollTo(0, 0);
+              }}>show now</Button>
             </NavLink>
           </div>
           {/* our homepage image  */}

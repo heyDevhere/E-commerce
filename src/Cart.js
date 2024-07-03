@@ -5,10 +5,12 @@ import { Button } from "./styles/Button";
 import styled from "styled-components";
 import FormatPrice from "./Helpers/FormatPrice";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./context/auth_Context";
 
 const Cart = () => {
   const { cart, clearCart, total_price, shipping_fee } = useCartContext();
   const { isAuthenticated, user } = useAuth0;
+  const { userLoggedIn, currentUser } = useAuth();
 
 
   console.log("🚀 ~ file: Cart.js ~ line 6 ~ Cart ~ cart", cart);
@@ -26,10 +28,10 @@ const Cart = () => {
       <div className="container">
 
         {
-          isAuthenticated && (
+          userLoggedIn && (
             <div className="cart-user--profile">
-              <img src={user.profile} alt={user.name} />
-              <h2 className="cart-user--name">{user.name}</h2>
+              <img src={currentUser.photoURL} alt={currentUser.displayName} />
+              <h2 className="cart-user--name">{currentUser.displayName}</h2>
             </div>
           )
         }
@@ -141,6 +143,7 @@ const Wrapper = styled.section`
     align-items: center;
     gap: 1.2rem;
     margin-bottom: 5.4rem;
+    margin-top: -5rem;
 
     img {
       width: 8rem;

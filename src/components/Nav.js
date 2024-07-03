@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 import { useCartContext } from "../context/cart_context";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "../styles/Button";
-
+import { useAuth } from "../context/auth_Context";
+import { doSignOut } from "../firebaseConfig/auth";
 
 const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
   const { total_item } = useCartContext();
-  const { loginWithRedirect, logout, isAuthenticated,user } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+  const { userLoggedIn, currentUser } = useAuth();
+  const navigate = useNavigate();
+
 
 
 
@@ -206,18 +210,26 @@ const Nav = () => {
             </NavLink>
           </li>
 
-          {isAuthenticated && <p>{user.name}</p>} 
+          {/* {isAuthenticated && <p>{user.name}</p>}  */}
+          {userLoggedIn && (
+            <li>
+              <NavLink className="navbar-link" to="/">
+                {currentUser.displayName}
+              </NavLink>
+            </li>
+          )}
 
 
 
-          {isAuthenticated ? 
-          <li>
-            <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-              Log Out
-            </Button>
-          </li>
+
+          {userLoggedIn ?
+            <li>
+              <Button onClick={() => { doSignOut().then(() => { navigate('/') }) }}>
+                Log Out
+              </Button>
+            </li>
             :
-          <li><Button onClick={() => loginWithRedirect()}>Log In</Button></li>
+            <li><Button onClick={() => { navigate('/login') }}>Log In</Button></li>
           }
 
 
@@ -225,7 +237,10 @@ const Nav = () => {
           <li>
             <NavLink to="/cart" className="navbar-link cart-trolley--link">
               <FiShoppingCart className="cart-trolley" />
+              { total_item>0 &&
               <span className="cart-total--item"> {total_item}</span>
+              }
+              
             </NavLink>
           </li>
         </ul>

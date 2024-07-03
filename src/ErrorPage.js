@@ -16,7 +16,9 @@ const ErrorPage = () => {
           </p>
 
           <NavLink to="/">
-            <Button>Go Back to Home</Button>
+            <Button onClick={() => {
+              window.scrollTo(0, 0);
+            }}>Go Back to Home</Button>
           </NavLink>
         </div>
       </div>
