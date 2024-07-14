@@ -2,13 +2,17 @@ import { useState } from "react";
 import styled from "styled-components";
 import { FaCheck } from "react-icons/fa";
 import CartAmountToggle from "./CartAmountToggle";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "../styles/Button";
 import { useCartContext } from "../context/cart_context";
+import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuth } from "../context/auth_Context";
 
 const AddToCart = ({ product }) => {
   const { addToCart } = useCartContext();
-
+  const navigate=useNavigate();
+  const { userLoggedIn } = useAuth();
   const { id, colors, stock } = product;
 
   const [color, setColor] = useState(colors[0]);
@@ -21,6 +25,15 @@ const AddToCart = ({ product }) => {
   const setIncrease = () => {
     amount < stock ? setAmount(amount + 1) : setAmount(stock);
   };
+
+  const navigateToCart=()=>{
+    if(userLoggedIn) {
+      navigate('/cart');
+      addToCart(id, color, amount, product)
+    } 
+    else toast.error("Login First!")
+    
+  }
 
 
 
@@ -54,7 +67,8 @@ const AddToCart = ({ product }) => {
         setIncrease={setIncrease}
       />
 
-      <NavLink to="/cart" onClick={() => addToCart(id, color, amount, product)}>
+{/* addToCart(id, color, amount, product)} */}
+      <NavLink onClick={navigateToCart}>
         <Button className="btn"  onClick={() => {
                   window.scrollTo(0, 0);
               }}  >Add To Cart</Button>

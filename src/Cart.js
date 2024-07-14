@@ -5,12 +5,15 @@ import { Button } from "./styles/Button";
 import styled from "styled-components";
 import FormatPrice from "./Helpers/FormatPrice";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 import { useAuth } from "./context/auth_Context";
 
 const Cart = () => {
-  const { cart, clearCart, total_price, shipping_fee } = useCartContext();
+  const { cart, clearCart, total_price, shipping_fee  } = useCartContext();
   const { isAuthenticated, user } = useAuth0;
   const { userLoggedIn, currentUser } = useAuth();
+
+
 
 
   console.log("🚀 ~ file: Cart.js ~ line 6 ~ Cart ~ cart", cart);

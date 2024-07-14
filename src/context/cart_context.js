@@ -1,21 +1,21 @@
 import { createContext, useContext, useReducer } from "react";
 import { useEffect } from "react";
 import reducer from "../reducer/cartReducer";
-
 const CartContext = createContext();
 
-const getLocalCartData = () => {
-  let localCartData = localStorage.getItem("DevCart");
-  if (localCartData ==  []) {
-    return [];
-  } else {
-    return JSON.parse(localCartData);
-  }
-};
+// const getLocalCartData = async () => {
+//   await localStorage.getItem("DevCart").then(value => {
+//     if (value == null) {
+//       return [];
+//     } else {
+//       return JSON.parse(value);
+//     }
+//   })
+// };
 
 
 const initialState = {
-  cart: getLocalCartData(),
+  cart: [],
   total_item: "",
   total_amount: "",
   shipping_fee: 50000,
@@ -35,6 +35,16 @@ const CartProvider = ({ children }) => {
     dispatch({ type: "CLEAR_CART" });
     window.scrollTo(0, 0);
   };
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem('DevCart')) || [];
+    dispatch({ type: 'SET_CART', payload: storedCart });
+  }, []);
+
+
+  useEffect(() => {
+    localStorage.setItem('DevCart', JSON.stringify(state.cart));
+  }, [state.cart]);
   
 
   const removeItem = (id) => {
@@ -52,6 +62,8 @@ const CartProvider = ({ children }) => {
   }, [state.cart]);
 
 
+
+
   const setDecrease = (id) => {
     dispatch({ type: "SET_DECREMENT", payload: id });
   };
@@ -62,9 +74,11 @@ const CartProvider = ({ children }) => {
 
 
   return (
+
     <CartContext.Provider value={{ ...state, addToCart, removeItem,clearCart,setDecrease,setIncrement }}>
       {children}
     </CartContext.Provider>
+
   );
 };
 
