@@ -20,6 +20,8 @@ const Login = () => {
             setIsSigningIn(true)
             try {
                 await doSignInWithEmailAndPassword(email, password)
+                window.scrollTo(0, 0);
+
             } catch (error) {
                 setErrorMessage(error.message)
                 setIsSigningIn(false)
@@ -33,6 +35,7 @@ const Login = () => {
             setIsSigningIn(true)
             try {
                 await doSignInWithGoogle()
+                window.scrollTo(0, 0);
             } catch (error) {
                 setErrorMessage(error.message)
                 setIsSigningIn(false)

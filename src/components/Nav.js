@@ -245,7 +245,7 @@ const Nav = () => {
           <li onClick={navigateToCart}>
             <NavLink  className="navbar-link cart-trolley--link" >
               <FiShoppingCart className="cart-trolley" />
-              { total_item>0 &&
+              { total_item>0 &&  userLoggedIn &&
               <span className="cart-total--item"> {total_item}</span>
               }
             </NavLink>
