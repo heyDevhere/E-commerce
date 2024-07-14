@@ -48,6 +48,14 @@ const Register = () => {
                         autoComplete="email"
                         autoFocus
                         value={email}
+                        sx={{
+                            '& .MuiInputBase-input': {
+                              fontSize: '1.5rem',
+                            },
+                            '& .MuiInputLabel-root': {
+                              fontSize: '1.1rem',
+                            },
+                          }} 
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <TextField
@@ -60,6 +68,14 @@ const Register = () => {
                         id="password"
                         autoComplete="new-password"
                         value={password}
+                        sx={{
+                            '& .MuiInputBase-input': {
+                              fontSize: '1.5rem',
+                            },
+                            '& .MuiInputLabel-root': {
+                              fontSize: '1.1rem',
+                            },
+                          }} 
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <TextField
@@ -72,6 +88,14 @@ const Register = () => {
                         id="confirmPassword"
                         autoComplete="off"
                         value={confirmPassword}
+                        sx={{
+                            '& .MuiInputBase-input': {
+                              fontSize: '1.5rem',
+                            },
+                            '& .MuiInputLabel-root': {
+                              fontSize: '1.1rem',
+                            },
+                          }} 
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     {errorMessage && (
@@ -81,14 +105,14 @@ const Register = () => {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 3, mb: 2 ,fontSize: '1.5rem'}}
                         disabled={isRegistering}
                     >
                         {isRegistering ? <CircularProgress size={24} /> : 'Sign Up'}
                     </Button>
                 </Box>
-                <Typography variant="h6" component="h6">
-                    Already have an account? <Link to="/login">Sign in</Link>
+                <Typography variant="h6" component="h6" sx={{fontSize: '1.5rem'}}>
+                    Already have an account? <Link to="/login" sx={{fontSize: '1.2rem'}} >Sign in</Link>
                 </Typography>
                 <Divider sx={{ my: 2 }}>OR</Divider>
                 <Button
@@ -96,6 +120,7 @@ const Register = () => {
                     variant="outlined"
                     startIcon={<GoogleIcon />}
                     disabled={isRegistering}
+                    sx={{fontSize: '1.2rem'}}
                 >
                     {isRegistering ? <CircularProgress size={24} /> : 'Continue with Google'}
                 </Button>

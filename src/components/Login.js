@@ -69,6 +69,14 @@ const Login = () => {
                         autoComplete="email"
                         autoFocus
                         value={email}
+                        sx={{
+                            '& .MuiInputBase-input': {
+                              fontSize: '1.5rem',
+                            },
+                            '& .MuiInputLabel-root': {
+                              fontSize: '1.2rem',
+                            },
+                        }}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <TextField
@@ -81,6 +89,14 @@ const Login = () => {
                         id="password"
                         autoComplete="current-password"
                         value={password}
+                        sx={{
+                            '& .MuiInputBase-input': {
+                              fontSize: '1.5rem',
+                            },
+                            '& .MuiInputLabel-root': {
+                              fontSize: '1.2rem',
+                            },
+                          }}                     
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     {errorMessage && (
@@ -90,13 +106,14 @@ const Login = () => {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 3, mb: 2 ,fontSize: '1.5rem'}}
                         disabled={isSigningIn}
                     >
                         {isSigningIn ? <CircularProgress size={24} /> : 'Sign In'}
                     </Button>
                 </Box>
-                <Typography variant="h6" component="h6" >
+                <Typography variant="h6" component="h6"    sx={{fontSize: '1.5rem'}}
+                >
                     Don't have an account? <Link to="/register">Sign up</Link>
                 </Typography>
                 <Divider sx={{ my: 2 }}>OR</Divider>
@@ -106,6 +123,7 @@ const Login = () => {
                     startIcon={<GoogleIcon />}
                     onClick={onGoogleSignIn}
                     disabled={isSigningIn}
+                    sx={{fontSize: '1.5rem'}}
                 >
                     {isSigningIn ? <CircularProgress size={24} /> : 'Continue with Google'}
                 </Button>
